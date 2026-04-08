@@ -1,0 +1,49 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\welcome\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\welcome\Documents\Corrector\answer-eval-env
+plugins: anyio-4.13.0
+collecting ... collected 40 items
+
+test_eval.py::TestHelpers::test_clean_text_lowercases PASSED             [  2%]
+test_eval.py::TestHelpers::test_clean_text_removes_punctuation PASSED    [  5%]
+test_eval.py::TestHelpers::test_clean_text_empty PASSED                  [  7%]
+test_eval.py::TestHelpers::test_similar_identical PASSED                 [ 10%]
+test_eval.py::TestHelpers::test_similar_completely_different PASSED      [ 12%]
+test_eval.py::TestHelpers::test_match_concepts_all_covered PASSED        [ 15%]
+test_eval.py::TestHelpers::test_match_concepts_none_covered PASSED       [ 17%]
+test_eval.py::TestHelpers::test_match_concepts_fuzzy PASSED              [ 20%]
+test_eval.py::TestGrader::test_score_in_unit_range PASSED                [ 22%]
+test_eval.py::TestGrader::test_perfect_answer_high_score PASSED          [ 25%]
+test_eval.py::TestGrader::test_empty_answer_score_0 PASSED               [ 27%]
+test_eval.py::TestGrader::test_very_short_answer_score_0 PASSED          [ 30%]
+test_eval.py::TestGrader::test_no_concepts_score_1 PASSED                [ 32%]
+test_eval.py::TestGrader::test_partial_answer_partial_score PASSED       [ 35%]
+test_eval.py::TestGrader::test_weak_areas_message_zero_score PASSED      [ 37%]
+test_eval.py::TestGrader::test_weak_areas_message_partial_score PASSED   [ 40%]
+test_eval.py::TestGrader::test_feedback_covered_and_missing_populated PASSED [ 42%]
+test_eval.py::TestGrader::test_max_score_is_1 PASSED                     [ 45%]
+test_eval.py::TestTasks::test_all_tasks_loaded PASSED                    [ 47%]
+test_eval.py::TestTasks::test_at_least_one_easy PASSED                   [ 50%]
+test_eval.py::TestTasks::test_at_least_one_medium PASSED                 [ 52%]
+test_eval.py::TestTasks::test_at_least_one_hard PASSED                   [ 55%]
+test_eval.py::TestTasks::test_get_task_easy PASSED                       [ 57%]
+test_eval.py::TestTasks::test_get_task_medium PASSED                     [ 60%]
+test_eval.py::TestTasks::test_get_task_hard PASSED                       [ 62%]
+test_eval.py::TestTasks::test_get_task_invalid_returns_none PASSED       [ 65%]
+test_eval.py::TestTasks::test_all_tasks_have_key_concepts PASSED         [ 67%]
+test_eval.py::TestEnvironment::test_reset_returns_state PASSED           [ 70%]
+test_eval.py::TestEnvironment::test_state_method_after_reset PASSED      [ 72%]
+test_eval.py::TestEnvironment::test_state_method_before_reset_raises PASSED [ 75%]
+test_eval.py::TestEnvironment::test_reset_invalid_task_raises PASSED     [ 77%]
+test_eval.py::TestEnvironment::test_step_without_reset_raises PASSED     [ 80%]
+test_eval.py::TestEnvironment::test_step_returns_done_true PASSED        [ 82%]
+test_eval.py::TestEnvironment::test_step_reward_in_unit_range PASSED     [ 85%]
+test_eval.py::TestEnvironment::test_step_info_has_evaluation PASSED      [ 87%]
+test_eval.py::TestEndToEnd::test_good_answer_high_score PASSED           [ 90%]
+test_eval.py::TestEndToEnd::test_partial_answer_medium_score PASSED      [ 92%]
+test_eval.py::TestEndToEnd::test_bad_answer_low_score PASSED             [ 95%]
+test_eval.py::TestEndToEnd::test_misleading_confident_answer_low_score PASSED [ 97%]
+test_eval.py::TestEndToEnd::test_scores_are_not_all_equal PASSED         [100%]
+
+============================= 40 passed in 0.13s ==============================

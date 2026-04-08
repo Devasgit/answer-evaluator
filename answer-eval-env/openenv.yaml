@@ -1,0 +1,82 @@
+name: answer-eval-env
+version: 1.0.0
+description: >
+  AI-powered evaluation environment that grades descriptive student answers
+  using key-concept coverage, fuzzy matching, and completeness signals.
+type: nlp-evaluation
+
+# ── Environment definition ────────────────────────────────────────────────────
+environment:
+  entrypoint: env.py
+  class: AnswerEvalEnv
+
+  lifecycle:
+    - reset()   # load a task → returns initial state
+    - step()    # submit answer → returns (state, reward, done, info)
+    - state()   # inspect current state at any time
+
+  state:
+    - name: question
+      type: string
+      description: The text of the question the student must answer
+    - name: key_concepts
+      type: list[string]
+      description: Concepts that must appear in a correct answer
+    - name: difficulty
+      type: string
+      enum: [easy, medium, hard]
+      description: Task difficulty level
+    - name: student_answer
+      type: string
+      nullable: true
+      description: The answer submitted by the student (null before step)
+
+# ── Agent interface ───────────────────────────────────────────────────────────
+agent:
+  input_schema:
+    - name: question_id
+      type: string
+      description: ID of the task to evaluate
+    - name: student_answer
+      type: string
+      description: The student's descriptive answer
+
+  action:
+    type: evaluation
+    description: Submit a student answer for grading
+
+  reward:
+    type: float
+    range: [0.0, 1.0]
+    description: >
+      Normalised score reflecting concept coverage (85%) and answer
+      completeness/length (15%). Higher = better answer.
+
+# ── API layer ─────────────────────────────────────────────────────────────────
+api:
+  framework: fastapi
+  port: 8080
+  endpoints:
+    - rule: /
+      method: GET
+      description: Health check
+    - rule: /tasks
+      method: GET
+      description: List all available tasks
+    - rule: /tasks/{task_id}
+      method: GET
+      description: Retrieve a single task by ID
+    - rule: /reset
+      method: POST
+      description: Reset environment for the given task_id
+    - rule: /state
+      method: GET
+      description: Return the current environment state
+    - rule: /evaluate
+      method: POST
+      description: Evaluate a student answer; returns score + feedback
+
+# ── Task catalogue ────────────────────────────────────────────────────────────
+tasks:
+  difficulties: [easy, medium, hard]
+  count: 9   # 3 per difficulty level
