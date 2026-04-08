@@ -46,16 +46,20 @@ def get_task_by_id(task_id: str):
 
 # ── Environment endpoints ─────────────────────────────────────────────────────
 
+class ResetRequest(BaseModel):
+    task_id: str | None = None
+
 @app.post("/reset", tags=["Environment"])
-def reset_environment(task_id: str):
+def reset_environment(request: ResetRequest | None = None):
     """
-    Reset the environment for a given task_id.
+    Reset the environment for a given task_id (or default to easy_1 if none provided).
     Returns the initial state.
     """
-    task = get_task(task_id)
+    target_task = request.task_id if request and request.task_id else "easy_1"
+    task = get_task(target_task)
     if not task:
-        raise HTTPException(status_code=404, detail=f"Task '{task_id}' not found.")
-    state, _ = environment.reset(task_id)
+        raise HTTPException(status_code=404, detail=f"Task '{target_task}' not found.")
+    state, _ = environment.reset(target_task)
     return {"status": "reset", "state": state}
 
 

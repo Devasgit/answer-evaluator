@@ -15,12 +15,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements and install them
-COPY answer-eval-env/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 # Copy all the environment code into the container
-COPY answer-eval-env/ .
+COPY . .
 
 EXPOSE 7860
 
